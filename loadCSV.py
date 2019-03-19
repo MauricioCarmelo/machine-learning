@@ -10,7 +10,7 @@ def loadCSV(filepath):
 			filepath - relative path to the .csv file
 		OUTPUT
 			sheet - dictionary structure referencing an attribute to all values in a single column
-			attributes - name of column attribute
+			attributes - names of columns
 			instances - list of values of each row, which makes an instance
 	"""
 	with open(filepath) as csv_file:
