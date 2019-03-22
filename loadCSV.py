@@ -37,8 +37,21 @@ def loadCSV(filepath):
 	return sheet, attributes, instances
 
 
-sheet, attributes, instances = loadCSV('input.csv')
+def dicionaryExtractor(dictionary, *args):
+	l = []
+	l_real = []
+	for arg in args:
+		l.append(dictionary[arg])
+	for item in l:
+		l_real.append(map(float, item))
+	return l_real
 
-print 'Loaded sheet within a dictionary:'
-for key in sheet.keys():
-	print sheet[key]
+def dicionarySpecificExtractor(dictionary, n, *args):
+	"""
+		returns the nth element from 'dictionary' for '*args'
+	"""
+
+	l = []
+	for arg in args:
+		l.append(dictionary[arg][n])
+	return l
