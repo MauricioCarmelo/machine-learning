@@ -3,7 +3,7 @@ Toolkit of useful functions to be used in everyday programs
 
 ## Usage
 
-**How to use loadCSV() within a program**
+**Example of how to use loadCSV() within a program**
 
 ```python
  sheet, attributes, instances = loadCSV('input.csv')
@@ -13,7 +13,7 @@ Toolkit of useful functions to be used in everyday programs
  	print sheet[key]
 ```
 
-**How to use KNN() within a program**
+**Example of how to use KNN() within a program**
 ```python
 point = [0.3, 0.7]
 kTests = [1, 3, 5, 7] # different tests with different K numbers
