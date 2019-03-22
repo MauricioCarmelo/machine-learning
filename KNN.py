@@ -112,16 +112,16 @@ def dicionaryExtractor(dictionary, *args):
 		l_real.append(map(float, item))
 	return l_real
 
-def KNN(filepath, point, k):
+def KNN(filepath, point, kTests):
 
 	"""
 		KNN algoritm
 		INPUT
 			filepath
 			point
-			k
+			kTests - list with integer for values of k tests
 		OUTPUT
-			answer - result of KNN guess
+			results - list of tuples for KNN for all k tests in kTests list
 	"""
 
 	sheet, attributes, instances = loadCSV(filepath)
@@ -133,45 +133,39 @@ def KNN(filepath, point, k):
 	distances = []
 	for p in to_be_calc.T:
 		distances.append(manhattanDistance(point, p))
+	
+	smallestDistances = np.argsort(distances)
 
-	kSmallests = getIndexOfKsmallests(distances, k)
+	results = []
 
-	#for n in kSmallests:
-	#	print dicionarySpecificExtractor(sheet, n, 'id')	
+	for k in kTests:
 
-	sat = 0
-	ins = 0
+		sat = 0
+		ins = 0
 
-	for n in kSmallests:
-		classe = dicionarySpecificExtractor(sheet, n, 'classe')
-		classe = classe[0]
-		if classe == 'SAT':
-			sat += 1
-		elif classe == 'INS':
-			ins += 1
+		for n in range(0, k):
+			classe = dicionarySpecificExtractor(sheet, smallestDistances[n], 'classe')
+			classe = classe[0]
+			if classe == 'SAT':
+				sat += 1
+			elif classe == 'INS':
+				ins += 1
 
-	print 'SAT = ' + str(sat) + ' INS = ' + str(ins)
-	if sat > ins:
-		return 'SAT'
-	elif ins > sat:
-		return 'INS'
-	else:
-		return 'undetermined'
+		if sat > ins:
+			classe = 'SAT'
+		elif ins > sat:
+			classe = 'INS'
+		else:
+			classe = 'undetermined'
+
+		results.append((k, classe))
+
+	return results
 
 
+# Test
 
 point = [0.3, 0.7]
 kTests = [1, 3, 5, 7] # different tests with different K numbers
-
-for k in kTests:
-	print 'Test for K = ' + str(k)
-	print 'KNN guess: ' + str(KNN('input.csv', point, k))
-	print
-
-
-
-
-
-
-
-
+results = KNN('input.csv', point, kTests)
+print results
