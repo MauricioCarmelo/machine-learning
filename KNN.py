@@ -56,43 +56,6 @@ def manhattanDistance(point1, point2):
 	return distance
 
 
-def getBiggestIndexOfIndex(distances, indexes, k):
-	"""
-		INPUT
-			distances - list where all distances are stored during runtime
-		OUTPUT
-			biggest - index of the biggest element within 'indexes' list
-	"""
-	biggest = 0 # first element of 'indexes' list
-	for i in range(0, k):
-		if distances[indexes[i]] > distances[indexes[biggest]]:
-			biggest = i
-	return biggest
-
-
-def getIndexOfKsmallests(distances, k):
-	"""
-		INPUT
-			distances
-			k
-		OUTPUT
-			indexes - indexes that references the k smallest elements within 'distances' list
-	"""
-
-	indexes = [] # indexes of smallest number within 'distances' array
-	
-	for i in range(0, k):
-		indexes.append(i)
-
-	biggest = getBiggestIndexOfIndex(distances, indexes, k) # index of biggest number in results
-	for i in range(k, len(distances)):
-		if distances[i] < distances[indexes[biggest]]:
-			indexes.remove(indexes[biggest]) # remove by value
-			indexes.append(i) # insert index of smaller element in results
-			biggest = getBiggestIndexOfIndex(distances, indexes, k)
-	
-	return indexes
-
 def dicionarySpecificExtractor(dictionary, n, *args):
 	"""
 		returns the nth element from 'dictionary' for '*args'
