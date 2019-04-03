@@ -29,6 +29,8 @@ class PosterioriMatrix:
 	def getMatrix(self):
 		return self.matrix
 
+
+
 class NaiveBayes:
 
 	def loadDatagram(self, filepath):
@@ -42,11 +44,9 @@ class NaiveBayes:
 			d[item] = len(dataset) / float(len(self.datagram))
 		return d
 
-
 	def runAlgorithm(self, target_attribute, values):
 		
 		apriori_props = self.getAprioriProbabilities(target_attribute)
-
 		posteriori_props = PosterioriMatrix(self.datagram, target_attribute, values).getMatrix()
 
 		result = {}
@@ -74,6 +74,4 @@ naive = NaiveBayes()
 naive.loadDatagram("data/naive-bayes-preprocessed-instancies.csv")
 result = naive.runAlgorithm("prato", predictive_values)
 print result
-
-
 
