@@ -10,7 +10,6 @@ class PosterioriMatrix:
 		self.matrix = {}
 		self.build_matrix()
 
-
 	def build_matrix(self):
 		
 		# calculate frequencies
